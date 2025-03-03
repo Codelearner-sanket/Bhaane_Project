@@ -23,7 +23,7 @@ public class AddToCartTest extends BaseTest {
         // Login
         wishlistPage.login(email, password);
 
-        // Click "March Sale"
+        // Click "fams" navbar 
         wishlistPage.clickfamsLink();
 
         // Click the selected product
