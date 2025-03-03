@@ -19,7 +19,7 @@ public class AddToCart {
     @FindBy(id = "mdiv")  // Modify based on actual popup locator
     private WebElement popupClose;
 
-    @FindBy(xpath = "//span[@class='dropdown-wrapper']")  // Dropdown element before login
+    @FindBy(css = ".selection")  // Dropdown element before login
     private WebElement dropdownWrapper;
 
     @FindBy(xpath = "//li[@class='col hidden-xs']")
@@ -63,16 +63,29 @@ public class AddToCart {
     }
 
     // Click on the dropdown wrapper before login
-    public void clickDropdownWrapper() {
+ // Click on the dropdown and select the first option
+    public void selectFirstDropdownOption() {
         try {
-            // Wait for the dropdown wrapper to be clickable
+            // Click on the dropdown wrapper
             wait.until(ExpectedConditions.elementToBeClickable(dropdownWrapper)).click();
             System.out.println("✅ Clicked on the dropdown wrapper.");
+
+            // Wait for the dropdown search box to appear
+            By dropdownSearch = By.xpath("//span[@class='select2-search select2-search--dropdown']");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownSearch));
+            System.out.println("✅ Dropdown appeared.");
+
+            // Wait for the first item in the dropdown and click it
+            By firstDropdownOption = By.xpath("//span[@class='select2-results']/ul/li[1]");
+            WebElement firstOption = wait.until(ExpectedConditions.elementToBeClickable(firstDropdownOption));
+            firstOption.click();
+            System.out.println("✅ Selected the first option from the dropdown.");
         } catch (Exception e) {
-            System.out.println("❌ Failed to click on the dropdown wrapper: " + e.getMessage());
+            System.out.println("❌ Failed to select the first dropdown option: " + e.getMessage());
             throw e; // Re-throw the exception to fail the test
         }
     }
+
 
     // Perform login
     public void login(String email, String password) {

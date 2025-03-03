@@ -18,7 +18,7 @@ public class AddToCartTest extends BaseTest {
         wishlistPage.closePopup();
 
         // Click on the dropdown wrapper before login
-        wishlistPage.clickDropdownWrapper();
+        wishlistPage.selectFirstDropdownOption();
 
         // Login
         wishlistPage.login(email, password);
